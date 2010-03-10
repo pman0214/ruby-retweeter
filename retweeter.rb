@@ -13,8 +13,8 @@ account = AccountManager::Account.new("#{ENV['HOME']}/.retweeter")
 # when no information available, ask a user to input information.
 if ! account.user
   account.interactive_input
+  account.update
 end
-account.update
 
 
 # authentication
@@ -30,17 +30,24 @@ else
   mentions = client.mentions
 end
 
+# retrieve friends list
+friends = client.friend_ids
+
 if mentions != nil
   mentions.reverse_each {|tweet|
-#     ### for debug begin
-#     print "------------------------------\n"
-#     print "ID  : #{tweet.id}\n"
-#     print "From: #{tweet.user.screen_name}\n"
-#     print "Text: #{tweet.text}\n"
-#     ### debug end
-     client.retweet(tweet.id)
-    account.since_id = "#{tweet.id}"
+    # retweet mentions by friends
+    if friends.include?(tweet.user.id)
+#       ### for debug begin
+#       print "------------------------------\n"
+#       print "ID  : #{tweet.id}\n"
+#       print "From: #{tweet.user.screen_name}\n"
+#       print "Text: #{tweet.text}\n"
+#       ### debug end
+      client.retweet(tweet.id)
+      account.since_id = "#{tweet.id}"
+    end
   }
 end
 
+# update since_id
 account.update
