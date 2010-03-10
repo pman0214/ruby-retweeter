@@ -7,6 +7,9 @@ require 'twitter'
 require File.join(File.dirname(__FILE__), 'account')
 
 
+UNOFFICIAL=true
+
+
 # retrieve account information.
 account = AccountManager::Account.new("#{ENV['HOME']}/.retweeter")
 
@@ -37,13 +40,28 @@ if mentions != nil
   mentions.reverse_each {|tweet|
     # retweet mentions by friends
     if friends.include?(tweet.user.id)
-#       ### for debug begin
-#       print "------------------------------\n"
-#       print "ID  : #{tweet.id}\n"
-#       print "From: #{tweet.user.screen_name}\n"
-#       print "Text: #{tweet.text}\n"
-#       ### debug end
-      client.retweet(tweet.id)
+      ### debug begin
+      print "------------------------------\n"
+      print "ID  : #{tweet.id}\n"
+      print "From: #{tweet.user.screen_name}\n"
+      print "Text: #{tweet.text}\n"
+      ### debug end
+
+      if UNOFFICIAL
+        # un-official retweet
+        retweet = "QT .@#{tweet.user.screen_name} #{tweet.text}"
+#         ### debug begin
+#         print "#{retweet}\n"
+#         ### debug end
+        client.update(retweet)
+      else
+        # official retweet
+#         ### debug begin
+#         print "#{tweet.id}\n"
+#         ### debug end
+        client.retweet(tweet.id)
+      end
+
       account.since_id = "#{tweet.id}"
     end
   }
