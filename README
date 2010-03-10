@@ -1,6 +1,6 @@
 = Automatic retweet bot
 
-This scripts automatically retweet mentions from friends.
+This scripts automatically retweet direct messages from friends.
 
 
 = DEPENDENCY
@@ -23,12 +23,12 @@ For the first time, enter your ID, password, and since ID:
     Since ID: since_id_here
 
 `Since ID' is a tweet ID which you finally checked.
-`retweeter' will search mentions after this tweet (excluding this
-tweet).
+`retweeter' will search direct messages after this tweet (excluding
+this tweet).
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	NOTICE
-If you do not specify the `Since ID', ALL MENTIONS will be retweeted
-for the first time.
+If you do not specify the `Since ID', ALL DIRECT MESSAGES will be
+retweeted for the first time.
 It is strongly recommend to specify `Since ID'.
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
