@@ -44,7 +44,7 @@ if tweets != nil
 #       print "Text: #{tweet.text}\n"
 #       ### debug end
 
-      text = ".@#{tweet.sender_screen_name} #{tweet.text}"
+      text = "#{tweet.sender_screen_name}: #{tweet.text}"
 #       ### debug begin
 #       print "#{text}\n"
 #       ### debug end
