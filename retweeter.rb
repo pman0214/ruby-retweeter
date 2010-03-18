@@ -3,6 +3,8 @@
 
 require 'rubygems'
 require 'twitter'
+require 'jcode'
+$KCODE = 'utf8'
 
 require File.join(File.dirname(__FILE__), 'account')
 
@@ -45,7 +47,14 @@ if tweets != nil
 #       ### debug end
 
       text = "#{tweet.sender_screen_name}: #{tweet.text}"
+
+      # truncate after 140 char
+      if text.jsize > 140
+        text = "#{text.each_char[0,136].join}..."
+      end
+
 #       ### debug begin
+#       print "----------\n"
 #       print "#{text}\n"
 #       ### debug end
       client.update(text)
